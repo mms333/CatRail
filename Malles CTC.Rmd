@@ -1,0 +1,39 @@
+---
+title: "Calculadora de Malles"
+author: "Miquel Murillo Saez"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+library(here)
+```
+
+```{r data_objects}
+CTC1S1 <- read_xlsx(here("dades","1S1.xlsx"))
+```
+
+```{r CTC1S1_malla}
+ggplot(data = CTC1S1, aes(x = station, y = departure, group = train_number)) +
+  geom_line(
+    aes(colour = train_number)
+  ) +
+  theme(
+    axis.text.x = element_text(angle=90,vjust =0.6)
+  ) +
+  scale_x_discrete(limits=CTC1S1$station) +
+  coord_cartesian(expand = FALSE, xlim = c(0.9, 18.1)) +
+  labs(
+    x = "Estació",
+    y = "Hora",
+    colour = "Número de tren"
+  )+
+  geom_point(
+    aes(colour = train_number)
+  )
+  ## Per tenir bé l'eix x cal posar tots ens punts en ordre al excel quan surten per primera vegada
+```
+
