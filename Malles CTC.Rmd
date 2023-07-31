@@ -17,25 +17,31 @@ CTC1S1 <- read_xlsx(here("dades","1S1.xlsx"))
 ```
 
 ```{r CTC1S1_malla}
-ggplot(data = CTC1S1, aes(x = station, y = departure, group = train_number)) +
+malla_CTC1S1 <- ggplot(data = CTC1S1, aes(x = station, y = departure, group = train_number)) +
   geom_line(
     aes(colour = train_number)
   ) +
   theme(
+     
     axis.text.x = element_text(angle=90,vjust =0.6)
   ) +
-  scale_x_discrete(limits=CTC1S1$station) +
   coord_cartesian(expand = FALSE, xlim = c(0.9, 18.1), ylim = c(ymd_hms("1899-12-31 00:00:00"),ymd_hms("1899-12-31 23:59:59"))) +
   labs(
     x = "Estació",
     y = "Hora",
     colour = "Número de tren"
   ) +
+  scale_x_discrete(limits=CTC1S1$station) +
   scale_y_datetime(date_label = "%H:%M") +
   geom_point(
     aes(colour = train_number)
   )
-  ## Per tenir bé l'eix x cal posar tots ens punts en ordre al excel quan surten per primera vegada
-## Maxim 18:00:00 
+  ## Per tenir bé l'eix x cal posar tots els punts en ordre al principi sense dades
+```
+
+```{r generador_grafics}
+ggsave(here("malles", "CTC1S1.jpg"), plot = malla_CTC1S1, dpi = 300,  width = 20, height = 80, units = "cm") ##This saves last graph run
+
+## Canviar plot per el que vull generar. Esborrar anterior abans de generar
 ```
 
