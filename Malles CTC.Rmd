@@ -25,15 +25,17 @@ ggplot(data = CTC1S1, aes(x = station, y = departure, group = train_number)) +
     axis.text.x = element_text(angle=90,vjust =0.6)
   ) +
   scale_x_discrete(limits=CTC1S1$station) +
-  coord_cartesian(expand = FALSE, xlim = c(0.9, 18.1)) +
+  coord_cartesian(expand = FALSE, xlim = c(0.9, 18.1), ylim = c(ymd_hms("1899-12-31 00:00:00"),ymd_hms("1899-12-31 23:59:59"))) +
   labs(
     x = "Estació",
     y = "Hora",
     colour = "Número de tren"
-  )+
+  ) +
+  scale_y_datetime(date_label = "%H:%M") +
   geom_point(
     aes(colour = train_number)
   )
   ## Per tenir bé l'eix x cal posar tots ens punts en ordre al excel quan surten per primera vegada
+## Maxim 18:00:00 
 ```
 
