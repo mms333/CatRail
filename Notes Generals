@@ -1,0 +1,3 @@
+When working, the second chunk is for saving objects to work with later.
+File called .Rdata is the one that saves objects.
+First chunk is for the R packages to be used.

@@ -1,0 +1,127 @@
+---
+title: "ggplot2 learning"
+author: "Miquel Murillo Saez"
+date: "`r Sys.Date()`"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+library(here)
+```
+
+```{r read_csv_practice}
+ca_np <- read_csv(here("data","ca_np.csv")) ##Saved ca_np data as an object
+```
+
+```{r data_ca_np_experiments}
+names(ca_np) ## object names do not need ""
+head(ca_np, n = 3) ## n = is the number of rows to be shown
+head(ca_np)
+```
+
+```{r readxl_practice}
+ci_np <- read_excel(here("data","ci_np.xlsx"))
+```
+
+```{r data_ci_np_experiments}
+names(ci_np)
+head(ci_np, n = 4)
+summary(ci_np) ##This function shows global data
+view(ci_np) ##This opens the file in RStudio
+```
+
+```{r ggplot_practice}
+ggplot(data = ci_np, aes(x = year, y = visitors))  + 
+  geom_line() +
+  geom_point()
+##aes() here names the axes
+##The + between geom_type() puts both styles in same graph (in this case its a line with points)
+ggplot_base <- ggplot(data = ci_np, aes(x = year, y = visitors)) ## saved as object to save time in the future
+```
+
+```{r ggplot_experiments}
+ggplot_base_column <- ggplot_base + geom_col() ##This saves this graph as an object for later use
+```
+
+```{r save_graph_as_object_experiment}
+ggplot_base_column
+```
+
+```{r ggplot_experiments_2}
+ggplot_base + geom_area()
+```
+
+```{r ggplot_graph_customising_experiments}
+ggplot_base +
+  geom_line(
+    colour = "blue"
+      ) +
+  geom_point(
+    pch = 18,
+    size = 3,
+    colour = "red",
+    alpha = 1
+  )
+## Customizing things must be separated by a comma
+## Use ?pch to seach for meaning of each number
+## colour needs to be searched on google
+## alpha is the transparency of the dot
+```
+
+```{r ggplot_graph_customising_by_variable}
+ggplot_base + 
+  geom_point (
+    aes(size = visitors,
+        colour = visitors),
+    alpha = 1
+  )
+```
+
+```{r ggplot_graph_customising_themes}
+ggplot_base + 
+  geom_point (
+    aes(size = visitors,
+        colour = visitors),
+    alpha = 1
+  ) +
+  theme_minimal() #For when i'm lazy for customising
+```
+
+```{r ggplot_graph_axis_labels_and_titles}
+ggplot_base +
+  geom_line() + 
+  theme_bw() +
+  labs(
+    x = "Year",
+    y = "Annual Park Visitors",
+    title = " Channel Islands National Park Visitors",
+    subtitle = "(1963 - 2016)"
+  )
+## Must learn how tf to centre graph titles
+```
+
+```{r multiseries_ggplot_graphs}
+ggplot(data = ca_np, aes(x = year, y = visitors, group = park_name)) +
+  geom_line() ## 5.10 Multi-series ggplot graph
+ggplot_np <- ggplot(data = ca_np, aes(x = year, y = visitors, group = park_name)) ##Multiseries graph configuration
+```
+
+```{r ggplot_faceting_graphs}
+##Faceting means having a graph for each series of data. Any change applies to all graphs generated
+ggplot_np +
+  geom_line(show.legend = FALSE) +
+  theme_light() +
+  labs(x = "year", y = "annual visitors") +
+  facet_wrap(~ park_name) ##This changes from one graph to one per data series.
+```
+
+```{r ggplot_graph_exporting}
+ggsave(here("figures", "ggplot_np_graph.jpg"), dpi = 180, width = 8, height = 8) ##This saves last graph run
+```
+
+```{r ggplot_graph_exporting_experiments}
+ggsave(plot = ggplot_base_column, here("figures", "ggplot_base_column.jpg"), width = 20, height = 20, units = "cm")
+##This syntax is used to save any graph if its an object in folder and file specified in here(), units = specifies which units is width and height in
+```
