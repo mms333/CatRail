@@ -10,10 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(readxl)
 library(here)
+library(openxlsx)
 ```
 
 ```{r data_objects}
 CTC1S1 <- read_xlsx(here("dades","1S1.xlsx"))
+CTC1S1_h <- read_xlsx(here("dades","1S1.xlsx"))|>
+  mutate( departure = format(departure, "%H:%M"))
 ```
 
 ```{r CTC1S1_malla}
@@ -41,13 +44,19 @@ ggsave(here("malles", "CTC1S1.jpg"), plot = malla_CTC1S1, dpi = 300,  width = 20
 ```
 
 ```{r generador_horaris_estacions}
-Malgrat_de_mar_horari <- CTC1S1 %>%
+Malgrat_de_mar_horari <- CTC1S1_h %>%
   filter(station == "MALGRAT DE MAR") %>%
   arrange(departure)
+## Cal fer servir l'objecte amb _h per eliminar el 1899
 ```
 
 ```{r generador_horaris_trens}
-R1A_001_horari <- CTC1S1 %>%
+R1A_001_horari <- CTC1S1_h %>%
   filter(train_number == "R1A.001") %>%
   arrange(departure)
+## Cal fer servir l'objecte amb _h per eliminar el 1899
+```
+
+```{r generador_excels}
+write.xlsx(Malgrat_de_mar_horari,here("horaris_generats","Malgrat_de_mar_horari.xlsx"),colNames = TRUE)
 ```
