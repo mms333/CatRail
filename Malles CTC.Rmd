@@ -38,7 +38,7 @@ malla_CTC1S1 <- ggplot(data = CTC1S1, aes(x = station, y = departure, group = tr
 ```
 
 ```{r generador_grafics}
-ggsave(here("malles", "CTC1S1.jpg"), plot = malla_CTC1S1, dpi = 300,  width = 20, height = 80, units = "cm") ##This saves last graph run
+ggsave(here("malles", "CTC1S1.jpg"), plot = malla_CTC1S1, dpi = 300,  width = 40, height = 80, units = "cm") ##This saves last graph run
 
 ## Canviar plot per el que vull generar. Esborrar anterior abans de generar
 ```
@@ -57,6 +57,15 @@ R1A_001_horari <- CTC1S1_h %>%
 ## Cal fer servir l'objecte amb _h per eliminar el 1899
 ```
 
+```{r generador_horaris_estacions_un_sentit}
+Malgrat_de_mar_horari_macanet <- CTC1S1_h %>%
+  filter(station == "MALGRAT DE MAR") %>%
+   filter(destination == "Maçanet-Massanes") %>%
+  arrange(departure)
+## Cal fer servir l'objecte amb _h per eliminar el 1899
+```
+
 ```{r generador_excels}
 write.xlsx(Malgrat_de_mar_horari,here("horaris_generats","Malgrat_de_mar_horari.xlsx"),colNames = TRUE)
+## Cal canviar l'objecte i el nom del document cada nou horari
 ```
