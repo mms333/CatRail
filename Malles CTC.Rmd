@@ -4,6 +4,9 @@ author: "Miquel Murillo Saez"
 date: "`r Sys.Date()`"
 output: html_document
 ---
+## Notes
+CTC1S1, 0.9, 18.1
+CTC1S2, 0.9, 6.1
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -30,8 +33,8 @@ ExportMalla(malla_CTC1S1, "CTC1S1.jpg")
 ```
 
 ```{r generador_horaris_estacions}
-Malgrat_de_mar_horari <- CTC1S1_h %>%
-  filter(station == "MALGRAT DE MAR") %>%
+Badalona_central_horari <- CTC1S1 %>%
+  filter(station == "Badalona Central") %>%
   arrange(departure)
 ## Cal fer servir l'objecte amb _h per eliminar el 1899
 ```
@@ -44,7 +47,7 @@ R1A_001_horari <- CTC1S1_h %>%
 ```
 
 ```{r generador_horaris_estacions_un_sentit}
-Malgrat_de_mar_horari_macanet <- CTC1S1_h %>%
+Malgrat_de_mar_horari_macanet <- CTC1S1 %>%
   filter(station == "MALGRAT DE MAR") %>%
    filter(destination == "Maçanet-Massanes") %>%
   arrange(departure)
