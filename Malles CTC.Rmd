@@ -6,7 +6,8 @@ output: html_document
 ---
 ## Notes
 CTC1S1, 0.9, 18.1
-CTC1S2, 0.9, 6.1
+CTC1S2, 0.9, 5.1
+CTC1S3, 0.9, 12.1
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -24,11 +25,14 @@ CTC1S1_h <- read_xlsx(here("dades","1S1.xlsx"))|>
 CTC1S2 <- read_xlsx(here("dades","1S2.xlsx"))
 CTC1S2_h <- read_xlsx(here("dades","1S2.xlsx"))|>
   mutate( departure = format(departure, "%H:%M"))
+CTC1S3 <- read_xlsx(here("dades","1S3.xlsx"))
+CTC1S3_h <- read_xlsx(here("dades","1S3.xlsx"))|>
+  mutate( departure = format(departure, "%H:%M"))
 ```
 
 ```{r generador_malla}
-malla_CTC1S1 <- GetMalla(CTC1S1, 0.9, 18.1)
-ExportMalla(malla_CTC1S1, "CTC1S1.jpg")
+malla_CTC1S3 <- GetMalla(CTC1S3, 0.9, 12.1)
+ExportMalla(malla_CTC1S3, "CTC1S3.jpg")
 ## Per tenir bé l'eix x cal posar tots els punts en ordre al principi sense dades
 ```
 
