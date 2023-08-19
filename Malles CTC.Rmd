@@ -8,6 +8,10 @@ output: html_document
 CTC1S1, 0.9, 18.1
 CTC1S2, 0.9, 5.1
 CTC1S3, 0.9, 12.1
+CTC2S1, 0.9, 10.1
+CTC2S2, 0.9, 8.1
+CTC2S3, 0.9, 11.1
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -28,11 +32,20 @@ CTC1S2_h <- read_xlsx(here("dades","1S2.xlsx"))|>
 CTC1S3 <- read_xlsx(here("dades","1S3.xlsx"))
 CTC1S3_h <- read_xlsx(here("dades","1S3.xlsx"))|>
   mutate( departure = format(departure, "%H:%M"))
+CTC2S1 <- read_xlsx(here("dades","2S1.xlsx"))
+CTC2S1_h <- read_xlsx(here("dades","2S1.xlsx"))|>
+  mutate( departure = format(departure, "%H:%M"))
+CTC2S2 <- read_xlsx(here("dades","2S2.xlsx"))
+CTC2S2_h <- read_xlsx(here("dades","2S2.xlsx"))|>
+  mutate( departure = format(departure, "%H:%M"))
+CTC2S3 <- read_xlsx(here("dades","2S3.xlsx"))
+CTC2S3_h <- read_xlsx(here("dades","2S3.xlsx"))|>
+  mutate( departure = format(departure, "%H:%M"))
 ```
 
 ```{r generador_malla}
-malla_CTC1S3 <- GetMalla(CTC1S3, 0.9, 12.1)
-ExportMalla(malla_CTC1S3, "CTC1S3.jpg")
+malla_CTC2S3 <- GetMalla(CTC2S3, 0.9, 11.1)
+ExportMalla(malla_CTC2S3, "CTC2S3.jpg")
 ## Per tenir bé l'eix x cal posar tots els punts en ordre al principi sense dades
 ```
 
