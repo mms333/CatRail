@@ -30,5 +30,5 @@ GetMalla <- function(liniaSeccio, xMin, xMax) {
 
 # Exporta la malla com a JPEG
 ExportMalla <- function(malla, nomExport) {
-  ggsave(here("malles", nomExport), plot = malla, dpi = 300,  width = 40, height = 80, units = "cm")
+  ggsave(here("malles", nomExport), plot = malla, dpi = 300,  width = 80, height = 80, units = "cm")
 }
