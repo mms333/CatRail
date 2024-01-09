@@ -4,7 +4,7 @@ author: "Miquel Murillo Saez"
 date: "`r Sys.Date()`"
 output: html_document
 ---
-## Notes
+## Notes Antic
 CTC1S1, 0.9, 20.1
 CTC1S2, 0.9, 5.1
 CTC1S3, 0.9, 13.1
@@ -17,6 +17,10 @@ CTC5S1, 0.9, 4.1
 CTC6S1, 0.9, 10.1
 CTC7S1, 0.9, 4.1
 CTC8S1 No és necessàri, només R7A
+
+## Notes Simplificat
+
+Vic - La Tor TVU1, 0.9, 11.1
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -61,11 +65,17 @@ CTC6S1_h <- read_xlsx(here("dades","6S1.xlsx"))|>
 CTC7S1 <- read_xlsx(here("dades","7S1.xlsx"))
 CTC7S1_h <- read_xlsx(here("dades","7S1.xlsx"))|>
   mutate( departure = format(departure, "%H:%M"))
+
+## Dades Simplificat
+
+TVU1 <- read_xlsx(here("dades","TVU1.xlsx"))
+TVU1_h <- read_xlsx(here("dades","TVU1.xlsx"))|>
+  mutate( departure = format(departure, "%H:%M"))
 ```
 
 ```{r generador_malla}
-malla_CTC7S1 <- GetMalla(CTC7S1, 0.9, 4.1)
-ExportMalla(malla_CTC7S1, "CTC7S1.jpg")
+malla_TVU1 <- GetMalla(TVU1, 0.9, 11.1)
+ExportMalla(malla_TVU1, "TVU1.jpg")
 ## Per tenir bé l'eix x cal posar tots els punts en ordre al principi sense dades
 ```
 
